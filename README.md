@@ -1,9 +1,7 @@
 # rust-algo-ds
 
-Goal: Read, understand, and implement algorithms and data structures in Introduction to Algorithms books in Rust. 
-
+Goal: Internalize Rust by implementing algorithms and data structures in Introduction to Algorithms. 
+ 
 Key Results: 
 * Increase familiarity with Rust. 
-* Prepare for deep tech start up. 
-
 
