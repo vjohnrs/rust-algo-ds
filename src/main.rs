@@ -1,8 +1,11 @@
 mod sorting;
+mod algorithms;
 /* 
 use crate::sorting::merge_sort::merge_sort;
 use crate::sorting::insertion_sort::insertion_sort;
 */
+
+//use crate::algorithms::maximum_sub_array::maximum_sub_array;
 
 fn main() {
     
@@ -12,8 +15,10 @@ fn main() {
     let len = arr.len();
 
     //println!("{:?}", merge_sort(&mut arr, 0, len - 1));
+    let mid = 0;
+    let low = 0;
 
-    for i in 5..8 {
-        println!("val of i is {}", i );
+    for i in (low..mid+1).rev() {
+        println!("{}", i);
     }
 }
