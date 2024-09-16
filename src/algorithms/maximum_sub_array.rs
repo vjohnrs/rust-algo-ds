@@ -49,7 +49,7 @@ fn maximum_sub_array_cross (arr:&Vec<i64>, low: usize, mid: usize, high:usize) -
     return (max_left, max_right, left_sum + right_sum); 
 }
 
-fn maximum_sub_array(arr: &Vec<i64>, low: usize, high: usize) -> (usize, usize, i64) {    
+fn maximum_sub_array_recursive(arr: &Vec<i64>, low: usize, high: usize) -> (usize, usize, i64) {    
     // base case
     if low == high {
         return (low, high, arr[low]);
@@ -57,9 +57,9 @@ fn maximum_sub_array(arr: &Vec<i64>, low: usize, high: usize) -> (usize, usize, 
 
     let mid = (low + high) / 2;
     // find max in left
-    let (left_low, left_high, left_sum) = maximum_sub_array(arr, low, mid);
+    let (left_low, left_high, left_sum) = maximum_sub_array_recursive(arr, low, mid);
     // find max in right
-    let (right_low, right_high, right_sum) = maximum_sub_array(arr,mid+1, high);
+    let (right_low, right_high, right_sum) = maximum_sub_array_recursive(arr,mid+1, high);
     // find max across
     let (cross_low, cross_high, cross_sum) = maximum_sub_array_cross(arr, low, mid, high);
     // select highest of above three to return
@@ -82,6 +82,6 @@ mod tests {
     fn run () {
         let arr = vec![13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7];
         let len = arr.len();
-        println!("{:?}", maximum_sub_array(&arr, 0, len - 1));
+        println!("{:?}", maximum_sub_array_recursive(&arr, 0 , len -1));
     }
 }
