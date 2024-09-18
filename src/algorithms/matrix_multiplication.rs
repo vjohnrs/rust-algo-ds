@@ -1,3 +1,6 @@
+
+
+
 fn matrix_multiplication_n_cube (A: Vec<Vec<i64>>, B: Vec<Vec<i64>>) -> Vec<Vec<i64>> {
 
     let mut C: Vec<Vec<i64>> = vec![];
