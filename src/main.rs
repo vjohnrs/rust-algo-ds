@@ -9,5 +9,5 @@ use crate::data_structures::heap::Heap;
 
 fn main() {    
    println!("{:?}", insertion_sort(vec![21, 12, 4, 999, -99]));
-   let mut heap = Heap::new();    
+   
 }
