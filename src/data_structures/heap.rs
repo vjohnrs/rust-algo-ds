@@ -1,9 +1,9 @@
 pub struct Heap {
-    arr: Vec<i64>
+    arr: Vec<i64>,
+    heapsize: usize
 }
 
 impl Heap {    
-
     fn parent(i: usize) -> usize {
         (i - 1) / 2
     }
@@ -15,42 +15,40 @@ impl Heap {
     fn right(i: usize) -> usize {
         (2 * i) + 2
     }
-    
-   pub fn new (input_arr: Vec<i64>) -> Self {
-        return Heap {
-            arr: input_arr
-        }
-    }
-
-    pub fn insert (&mut self, val: i64) {
-        self.arr.push(val);
-    }
 
     fn get_arr (&self) -> &Vec<i64> {
         return &self.arr;
     }
 
     fn max_heapify(&mut self, i: usize){
+
         let mut arr = &mut self.arr;
 
         let l = Self::left(i);
         let r = Self::right(i);
+
         let mut largest:usize = i;
 
-        if l < arr.len() && arr[l] > arr[largest] {
+        if l < self.heapsize && arr[l] > arr[largest] {
             largest = l; 
         } 
         
-        if r < arr.len() && arr[r] > arr[largest] {
+        if r < self.heapsize && arr[r] > arr[largest] {
             largest = r; 
         } 
 
         if largest != i {
-            let mut temp = arr[i];
-            arr[i] = arr[largest];
-            arr[largest] = temp;
+            self.swap(i, largest);            
             self.max_heapify(largest);
         }
+    }
+    
+
+    fn swap (&mut self, i: usize, j: usize){
+        let mut arr = &mut self.arr;
+        let mut temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 
     fn build_max_heap(&mut self) {                        
@@ -58,6 +56,28 @@ impl Heap {
             self.max_heapify(i);
         }
     }
+    
+    pub fn new (input_arr: Vec<i64>) -> Self {
+        let len = input_arr.len();
+        return Heap {
+            arr: input_arr,
+            heapsize: len
+        }
+    }
+
+    pub fn insert (&mut self, val: i64) {
+        self.arr.push(val);
+    }  
+  // Todo
+  /* pub fn heap_sort (&mut self) { 
+        
+        self.build_max_heap();        
+        for i in (1..self.arr.len()).rev(){
+            self.swap(0, i);
+            self.heapsize = self.heapsize - 1;
+            self.max_heapify(1);
+        }
+    } */ 
 }
 
  #[cfg(test)]
@@ -105,6 +125,15 @@ fn build_max_heap(){
     heap.build_max_heap();
     println!("{:?}", heap.get_arr());    
 }
+ // Todo
+ /* 
+#[test]
+fn run_heap_sort(){
+    let mut heap = Heap::new(vec![4,1,3,2,16,9,10,14,8,7]);
+    heap.heap_sort();
+    println!("sorted data {:?}", heap.get_arr());    
+}
+*/
 
 }
 
