@@ -1,10 +1,10 @@
 pub struct Heap {
-    arr: Vec<i64>,
-    heapsize: usize
+    pub arr: Vec<i64>,
+    pub heapsize: usize
 }
 
 impl Heap {
-    fn parent (i: usize) -> usize {
+    pub fn parent (i: usize) -> usize {
         (i - 1)/ 2
     }
 
@@ -16,7 +16,7 @@ impl Heap {
         (2 * i) + 2
     }
 
-    fn new(arr: Vec<i64>) -> Self {
+    pub fn new(arr: Vec<i64>) -> Self {
         
         let len = arr.len();
 
@@ -26,14 +26,14 @@ impl Heap {
         }
     }
 
-    fn swap (&mut self, i:usize, j:usize) {
+    pub fn swap (&mut self, i:usize, j:usize) {
         let mut arr = &mut self.arr;
         let temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
 
-    fn max_heapify (&mut self, i:usize) {
+    pub fn max_heapify (&mut self, i:usize) {
 
         let mut arr = &mut self.arr;
 
@@ -55,7 +55,7 @@ impl Heap {
         }
     }
 
-    fn build_max_heap (&mut self) {
+    pub fn build_max_heap (&mut self) {
         for i in (0..(&self.arr.len() / 2)).rev() {
             &self.max_heapify(i);
         }
