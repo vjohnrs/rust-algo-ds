@@ -22,7 +22,7 @@ impl Heap {
 
         return Self {
             arr: arr,
-            heapsize: len
+            heapsize: len - 1
         }
     }
 
@@ -41,11 +41,11 @@ impl Heap {
         let left = Self::left(i);
         let right = Self::right(i);
 
-        if left < self.heapsize && arr[left] >= arr[largest] {
+        if left <= self.heapsize && arr[left] >= arr[largest] {
             largest = left; 
         }
 
-        if right < self.heapsize && arr[right] >= arr[largest] {
+        if right <= self.heapsize && arr[right] >= arr[largest] {
             largest = right; 
         }
 
@@ -65,7 +65,7 @@ impl Heap {
                 
         self.build_max_heap();
 
-        for i in (0..self.arr.len()).rev(){       
+        for i in (1..self.arr.len()).rev(){       
             self.swap(0, i);
             self.heapsize -= 1;
             self.max_heapify(0);
@@ -129,6 +129,14 @@ mod tests {
         let mut heap = Heap::new(vec![4,1,3,2,16,9,10,14,8,7]);
         heap.heap_sort();
         assert_eq!(heap.arr, vec![1, 2, 3, 4, 7, 8, 9, 10, 14, 16]);
+        
+        let mut heap = Heap::new(vec![1]);
+        heap.heap_sort();
+        assert_eq!(heap.arr, vec![1]);
+
+        let mut heap = Heap::new(vec![21,1]);
+        heap.heap_sort();
+        assert_eq!(heap.arr, vec![1,21]);
     }
 
 }
