@@ -6,31 +6,35 @@
 
 i_exit variabe to work around while loop using "-1" to exit, since rust usizes can't be negative.  
 
+Todo:
+
+- Review if line#31 is necessary.
 */
 
-pub fn insertion_sort( mut arr: Vec<i64> ) -> Vec<i64> {        
-    
+pub fn insertion_sort( mut arr: Vec<i64> ) -> Vec<i64> {   
+
     for j in 1..arr.len() {
         let key = arr[j];
 
-        let mut i = j - 1; 
+        let mut i = j - 1;
 
         while i >= 0 && arr[i] >= key {
-            
             arr[i+1] = arr[i];
             
             if i == 0 {
                 break;
             }
-
-            i -= 1; 
+            
+            i -= 1;
         }
 
         if arr[i] >= key {
-            arr[i] = key; 
+            arr[i] = key;
         }
-    }
-    return arr; 
+    }         
+
+    return arr;
+  
 }
 
 #[cfg(test)]

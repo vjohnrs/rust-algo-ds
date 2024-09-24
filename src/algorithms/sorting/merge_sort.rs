@@ -1,9 +1,13 @@
-use std::i64;
+/*
 
-fn merge(arr: &mut Vec<i64>, p: usize, q: usize, r: usize) {  
-    
-    let mut L: Vec<i64> = Vec::new();    
-    let mut R: Vec<i64> = Vec::new();    
+Tips: 
+- Common overlooked detail is instead of comparing between L[i] and R[j], ending up comparing between arr[i] and arr[j].
+*/
+
+fn merge(arr: &mut Vec<i64>, p: usize, q: usize, r: usize) {
+
+    let mut L = vec![];
+    let mut R = vec![];
 
     for i in p..q+1 {
         L.push(arr[i]);
@@ -16,11 +20,11 @@ fn merge(arr: &mut Vec<i64>, p: usize, q: usize, r: usize) {
     L.push(i64::MAX);
     R.push(i64::MAX);
 
-    let mut i = 0; 
-    let mut j = 0; 
-    
+    let mut i:usize = 0;
+    let mut j:usize = 0;
+
     for k in p..r+1 {
-        if L[i] <= R[j]{
+        if L[i] <= R[j] {
             arr[k] = L[i];
             i += 1; 
         } else {
@@ -28,19 +32,19 @@ fn merge(arr: &mut Vec<i64>, p: usize, q: usize, r: usize) {
             j += 1;
         }
     }
-    
+
 }
 
-pub fn merge_sort(arr: &mut Vec<i64>, p: usize, r: usize) -> &mut Vec<i64> {  
-    
+fn merge_sort (arr: &mut Vec<i64>, p: usize, r: usize) -> &mut Vec<i64> {
+
     if p < r {
         let q = (r + p) / 2;
         merge_sort(arr, p, q);
-        merge_sort(arr,q+1, r);
+        merge_sort(arr, q+1, r);
         merge(arr, p, q, r);
     }
-    
-    return arr; 
+
+    return arr;
 }
 
 #[cfg(test)]
@@ -64,9 +68,9 @@ mod tests{
         let len = arr.len();
         assert_eq!(merge_sort(&mut arr, 0, len - 1), &mut vec![5,5,5,5]);
 
-
-
-
-
+        // let mut arr = vec![];
+        // let len = arr.len();
+        // println!("{}", len);
+        // assert_eq!(merge_sort(&mut arr, 0, len - 1), &mut vec![]);
     }
 }

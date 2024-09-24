@@ -1,20 +1,21 @@
 pub fn maximum_sub_array_nsquared(arr: &Vec<i64>) -> (usize, usize) {
-    
-    let mut max = i64::MIN; 
+
+    let mut max = i64::MIN;
     let mut result: (usize, usize) = (0,0);
 
     for i in 0..arr.len() {
-        for j in i+1..arr.len() {
-           
+        for j in i+1..arr.len(){
+
             let diff = arr[j] - arr[i];
-            
             if diff > max {
                 max = diff;
-                result = (i, j);
-            }
+                result = (i,j);
+            }         
         }
     }
+
     return result;
+    
 }
 
 

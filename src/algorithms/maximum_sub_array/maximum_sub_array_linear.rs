@@ -1,25 +1,26 @@
 pub fn maximum_sub_array_linear (arr: & Vec<i64>) -> (usize, usize, i64) {
 
-    let mut max_left: usize = 0;
-    let mut max_right: usize = 0; 
-    let mut max_sum: i64 = i64::MIN;
+    let mut max_sum: i64 = i64::MIN; 
+    let mut max_i: usize = 0; 
+    let mut max_j: usize = 0;
 
-    let mut sum: i64 = 0; 
+    let mut sum = 0;
+    
+    for i in 0..arr.len(){
+       sum += arr[i];
 
-
-    for i in 0..arr.len() {
-       
-        sum = sum + arr[i];
-
-        if sum >= max_sum {
-            max_sum = sum;
-            max_right = i;
-        } else if sum < 0 {
-            sum = 0;
-            max_left = i +1;
-        } 
+       if sum >= max_sum {
+         max_sum = sum;
+         max_j = i;
+       } else if sum < 0 {
+         sum = 0;
+         max_i = i + 1;
+       }    
     }
-    return (max_left,max_right,max_sum);
+
+    return (max_i, max_j, max_sum);
+
+
 }
 
 
